@@ -40,8 +40,8 @@ public class MyApp implements EntryPoint {
                 }
             });
         });
-        RootPanel.get().add(textBox);
-        RootPanel.get().add(button);
-        RootPanel.get().add(label);
+        RootPanel.get("myElement").add(textBox);
+        RootPanel.get("myElement").add(button);
+        RootPanel.get("myElement").add(label);
     }
 }
