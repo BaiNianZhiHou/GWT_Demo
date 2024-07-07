@@ -9,7 +9,7 @@ import shared.MyService;
 import shared.MyServiceAsync;
 
 /**
- * ${DESC}
+ * GWT服务的入口
  *
  * @author cxq
  * @date 2024/7/7 11:29
