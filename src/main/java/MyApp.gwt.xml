@@ -1,0 +1,11 @@
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.8.0//EN" "http://gwtproject.org/doctype/2.8.0/gwt-module.dtd">
+<module>
+
+  <source path='client'/>
+  <source path='shared'/>
+  <source path='server'/>
+  <inherits name='com.google.gwt.user.User'/>
+  <entry-point class='client.MyApp'/>
+  <servlet path='/myservice' class='server.MyServiceImpl'/>
+
+</module>
