@@ -1,7 +1,4 @@
-package server.impl;/**
- * @author cxq
- * @date 2024/7/7 12:26
- */
+package server.impl;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import shared.MyService;
@@ -10,7 +7,7 @@ import shared.MyService;
  * 服务
  *
  * @author cxq
- * @date  2024-07-07 12:26
+ * @date 2024-07-07 12:26
  */
 public class MyServiceImpl extends RemoteServiceServlet implements MyService {
 
