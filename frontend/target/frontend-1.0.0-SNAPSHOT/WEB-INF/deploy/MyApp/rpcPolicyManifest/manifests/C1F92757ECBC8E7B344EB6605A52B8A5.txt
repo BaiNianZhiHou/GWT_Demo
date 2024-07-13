@@ -1,0 +1,2 @@
+serviceClass: shared.MyService
+path: 0C9C98F849F52F4601BCCCA2930B376C.gwt.rpc

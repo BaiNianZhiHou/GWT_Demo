@@ -1,0 +1,3 @@
+# Module MyApp
+# RPC service class, partial path of RPC policy file
+shared.MyService, 0C9C98F849F52F4601BCCCA2930B376C.gwt.rpc

@@ -1,0 +1,6 @@
+client\MyApp$1.class
+client\MyApp.class
+server\MyServiceImpl.class
+shared\MyServiceAsync.class
+server\impl\MyServiceImpl.class
+shared\MyService.class
