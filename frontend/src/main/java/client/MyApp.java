@@ -25,7 +25,7 @@ public class MyApp implements EntryPoint {
         // 定义服务
         MyServiceAsync myService = GWT.create(MyService.class);
         ServiceDefTarget endpoint = (ServiceDefTarget) myService;
-        endpoint.setServiceEntryPoint(GWT.getModuleBaseURL() + "myservice");
+        endpoint.setServiceEntryPoint(GWT.getModuleBaseURL() + "myService");
         // 定义按钮的点击事件
         button.addClickHandler(event -> {
             String text = textBox.getText();

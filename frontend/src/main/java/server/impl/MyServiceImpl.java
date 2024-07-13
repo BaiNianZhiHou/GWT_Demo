@@ -13,6 +13,6 @@ public class MyServiceImpl extends RemoteServiceServlet implements MyService {
 
     @Override
     public String processText(String text) {
-        return "Processed: " + text;
+        return "输入的文本内容：" + text;
     }
 }
