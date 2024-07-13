@@ -5,7 +5,8 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
- * @author Administrator
+ * @author cxq
+ * @date 2024/7/7 11:29
  */
 public interface MyServiceAsync {
 

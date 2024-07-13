@@ -9,7 +9,7 @@ import shared.MyService;
 import shared.MyServiceAsync;
 
 /**
- * ${DESC}
+ * GWT服务的入口
  *
  * @author cxq
  * @date 2024/7/7 11:29
@@ -40,8 +40,8 @@ public class MyApp implements EntryPoint {
                 }
             });
         });
-        RootPanel.get().add(textBox);
-        RootPanel.get().add(button);
-        RootPanel.get().add(label);
+        RootPanel.get("myElement").add(textBox);
+        RootPanel.get("myElement").add(button);
+        RootPanel.get("myElement").add(label);
     }
 }
