@@ -6,6 +6,6 @@
   <source path='server'/>
   <inherits name='com.google.gwt.user.User'/>
   <entry-point class='client.MyApp'/>
-  <servlet path='/myservice' class='server.MyServiceImpl'/>
+  <servlet path='/myService' class='server.impl.MyServiceImpl'/>
 
 </module>

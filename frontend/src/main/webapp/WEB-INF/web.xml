@@ -5,10 +5,10 @@
          version="4.0">
   <servlet>
     <servlet-name>MyApp MyService</servlet-name>
-    <servlet-class>server.MyServiceImpl</servlet-class>
+    <servlet-class>server.impl.MyServiceImpl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MyApp MyService</servlet-name>
-    <url-pattern>/MyApp/myservice</url-pattern>
+    <url-pattern>/MyApp/myService</url-pattern>
   </servlet-mapping>
 </web-app>

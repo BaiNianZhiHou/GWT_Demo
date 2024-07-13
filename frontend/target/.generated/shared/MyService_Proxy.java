@@ -18,7 +18,7 @@ public class MyService_Proxy extends RemoteServiceProxy implements shared.MyServ
   
   public MyService_Proxy() {
     super(GWT.getModuleBaseURL(),
-      "myservice", 
+      "myService", 
       SERIALIZATION_POLICY, 
       SERIALIZER);
   }
