@@ -3,12 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
   <servlet>
     <servlet-name>MyApp MyService</servlet-name>
     <servlet-class>server.impl.MyServiceImpl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MyApp MyService</servlet-name>
-    <url-pattern>/MyApp/myservice</url-pattern>
+    <url-pattern>/MyApp/myService</url-pattern>
   </servlet-mapping>
 </web-app>
