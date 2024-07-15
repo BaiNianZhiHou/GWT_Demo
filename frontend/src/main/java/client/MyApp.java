@@ -4,7 +4,11 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.TextBox;
+import server.ApiService;
 import shared.MyService;
 import shared.MyServiceAsync;
 
@@ -20,28 +24,44 @@ public class MyApp implements EntryPoint {
     public void onModuleLoad() {
         // 定义组件
         final TextBox textBox = new TextBox();
-        final Button button = new Button("Submit");
+        final Button button1 = new Button("RPC Button");
+        final Button button2 = new Button("RequestBuilder Button");
         final Label label = new Label();
-        // 定义服务
+
         MyServiceAsync myService = GWT.create(MyService.class);
         ServiceDefTarget endpoint = (ServiceDefTarget) myService;
         endpoint.setServiceEntryPoint(GWT.getModuleBaseURL() + "myService");
-        // 定义按钮的点击事件
-        button.addClickHandler(event -> {
-            String text = textBox.getText();
-            myService.processText(text, new AsyncCallback<String>() {
+        // 定义按钮1的回调事件，RPC通信
+        button1.addClickHandler(event -> {
+            myService.processText(textBox.getText(), new AsyncCallback<String>() {
                 @Override
                 public void onFailure(Throwable caught) {
                     label.setText("Error: " + caught.getMessage());
                 }
+
                 @Override
                 public void onSuccess(String result) {
                     label.setText(result);
                 }
             });
         });
+        // 定义按钮2的回调事件，使用RequestBuilder请求SpringBoot程序
+        button2.addClickHandler(clickEvent -> {
+            ApiService.fetchDataOfSayHello(new AsyncCallback<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    label.setText(result);
+                }
+
+                @Override
+                public void onFailure(Throwable caught) {
+                    label.setText(caught.getMessage());
+                }
+            });
+        });
         RootPanel.get("myElement").add(textBox);
-        RootPanel.get("myElement").add(button);
+        RootPanel.get("myElement").add(button1);
+        RootPanel.get("myElement").add(button2);
         RootPanel.get("myElement").add(label);
     }
 }

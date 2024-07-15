@@ -1,5 +1,8 @@
-client\MyApp$1.class
 client\MyApp.class
+server\ApiService.class
 shared\MyServiceAsync.class
+client\MyApp$2.class
+client\MyApp$1.class
+server\ApiService$1.class
 server\impl\MyServiceImpl.class
 shared\MyService.class
