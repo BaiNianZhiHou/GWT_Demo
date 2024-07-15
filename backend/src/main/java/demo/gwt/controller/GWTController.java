@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * GWT API
+ * GWT service API
  *
  * @author cxq
  * @date 2024/7/13 17:56
