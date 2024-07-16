@@ -18,6 +18,6 @@ public class GWTController {
 
     @GetMapping("/sayHello")
     public String sayHello() {
-        return "你好呀";
+        return "hello world";
     }
 }

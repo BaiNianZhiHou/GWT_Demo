@@ -1,8 +1,6 @@
 package shared;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.RemoteService;
-import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
  * @author cxq
@@ -10,5 +8,10 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 public interface MyServiceAsync {
 
-    void processText(String text, AsyncCallback<String> async);
+    /**
+     * 累加
+     *
+     * @param num 带累加数值
+     */
+    void accumulate(int num, AsyncCallback<Integer> async);
 }

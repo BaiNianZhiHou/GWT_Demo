@@ -9,5 +9,12 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
  */
 @RemoteServiceRelativePath("myService")
 public interface MyService extends RemoteService {
-    String processText(String text);
+
+    /**
+     * 累加
+     *
+     * @param num 带累加数值
+     * @return 结果
+     */
+    int accumulate(int num);
 }

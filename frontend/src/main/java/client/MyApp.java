@@ -3,7 +3,6 @@ package client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.rpc.ServiceDefTarget;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -20,28 +19,32 @@ import shared.MyServiceAsync;
  */
 public class MyApp implements EntryPoint {
 
+    /**
+     * 创建异步服务代理
+     */
+    private final MyServiceAsync myService = GWT.create(MyService.class);
+
     @Override
     public void onModuleLoad() {
+
         // 定义组件
         final TextBox textBox = new TextBox();
         final Button button1 = new Button("RPC Button");
         final Button button2 = new Button("RequestBuilder Button");
         final Label label = new Label();
 
-        MyServiceAsync myService = GWT.create(MyService.class);
-        ServiceDefTarget endpoint = (ServiceDefTarget) myService;
-        endpoint.setServiceEntryPoint(GWT.getModuleBaseURL() + "myService");
         // 定义按钮1的回调事件，RPC通信
         button1.addClickHandler(event -> {
-            myService.processText(textBox.getText(), new AsyncCallback<String>() {
+            // 进行异步调用，避免阻塞UI线程
+            myService.accumulate(Integer.parseInt(textBox.getText()), new AsyncCallback<Integer>() {
                 @Override
                 public void onFailure(Throwable caught) {
                     label.setText("Error: " + caught.getMessage());
                 }
 
                 @Override
-                public void onSuccess(String result) {
-                    label.setText(result);
+                public void onSuccess(Integer result) {
+                    label.setText(result.toString());
                 }
             });
         });

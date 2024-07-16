@@ -1,6 +1,7 @@
 package server.impl;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import java.util.concurrent.atomic.AtomicInteger;
 import shared.MyService;
 
 /**
@@ -11,8 +12,14 @@ import shared.MyService;
  */
 public class MyServiceImpl extends RemoteServiceServlet implements MyService {
 
+    /**
+     * 数值累加
+     */
+    private final AtomicInteger counter = new AtomicInteger(0);
+
     @Override
-    public String processText(String text) {
-        return "输入的文本内容：" + text;
+    public int accumulate(int num) {
+        // 使用原子性自增操作
+        return counter.addAndGet(num);
     }
 }
