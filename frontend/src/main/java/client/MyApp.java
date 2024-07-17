@@ -22,7 +22,7 @@ public class MyApp implements EntryPoint {
     /**
      * 创建异步服务代理
      */
-    private final MyServiceAsync myService = GWT.create(MyService.class);
+    private final MyServiceAsync myServiceAsync = GWT.create(MyService.class);
 
     @Override
     public void onModuleLoad() {
@@ -36,7 +36,7 @@ public class MyApp implements EntryPoint {
         // 定义按钮1的回调事件，RPC通信
         button1.addClickHandler(event -> {
             // 进行异步调用，避免阻塞UI线程
-            myService.accumulate(Integer.parseInt(textBox.getText()), new AsyncCallback<Integer>() {
+            myServiceAsync.accumulate(Integer.parseInt(textBox.getText()), new AsyncCallback<Integer>() {
                 @Override
                 public void onFailure(Throwable caught) {
                     label.setText("Error: " + caught.getMessage());
