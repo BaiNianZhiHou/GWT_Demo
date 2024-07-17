@@ -4,6 +4,7 @@
   <source path='client'/>
   <source path='shared'/>
   <source path='server'/>
+  <public path='public'/>
   <inherits name='com.google.gwt.user.User'/>
   <entry-point class='client.MyApp'/>
   <servlet path='/myService' class='server.impl.MyServiceImpl'/>
