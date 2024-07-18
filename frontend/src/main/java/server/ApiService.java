@@ -8,7 +8,7 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
- * api调用
+ * 第三方api调用
  *
  * @author cxq
  * @date 2024/7/15 17:29

@@ -5,7 +5,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import shared.MyService;
 
 /**
- * 服务
+ * 服务端的RPC服务
  *
  * @author cxq
  * @date 2024-07-07 12:26
