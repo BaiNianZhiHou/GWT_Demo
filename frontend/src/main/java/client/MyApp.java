@@ -37,90 +37,91 @@ public class MyApp implements EntryPoint {
         final TextBox textBox = new TextBox();
         final Button button1 = new Button("RPC Button");
         final Button button2 = new Button("RequestBuilder Button");
-        final Label label = new Label();
-
-        /**
-         * 客户端和服务端的通信
-         */
-        // 定义按钮1的回调事件，RPC通信
-        button1.addClickHandler(event -> {
-            // 进行异步调用，避免阻塞UI线程
-            myServiceAsync.accumulate(Integer.parseInt(textBox.getText()), new AsyncCallback<Integer>() {
-                @Override
-                public void onFailure(Throwable caught) {
-                    label.setText("Error: " + caught.getMessage());
-                }
-
-                @Override
-                public void onSuccess(Integer result) {
-                    label.setText(result.toString());
-                }
-            });
-        });
-        // 定义按钮2的回调事件，使用RequestBuilder请求SpringBoot程序
-        button2.addClickHandler(clickEvent -> {
-            ApiService.fetchDataOfSayHello(new AsyncCallback<String>() {
-                @Override
-                public void onSuccess(String result) {
-                    label.setText(result);
-                }
-
-                @Override
-                public void onFailure(Throwable caught) {
-                    label.setText(caught.getMessage());
-                }
-            });
-        });
-        /**
-         * 注册历史记录变化处理程序
-         */
-        History.addValueChangeHandler(event -> {
-            String historyToken = event.getValue();
-            updateContent(historyToken);
-        });
-        // 添加页面导航
-        RootPanel.get().add(createNavPanel());
-        // 检查初始的历史记录条目
-        if (History.getToken().isEmpty()) {
-            History.newItem("home");
-        } else {
-            // 更新
-            updateContent(History.getToken());
-        }
+        final Label counterLabel = new Label();
+        final Label welcomeLabel = new Label();
+        welcomeLabel.setText(setLabelContent(History.getToken()));
         /**
          * 将组件定义到根面板中
          */
         RootPanel.get("myElement").add(textBox);
         RootPanel.get("myElement").add(button1);
         RootPanel.get("myElement").add(button2);
-        RootPanel.get("myElement").add(label);
+        RootPanel.get("myElement").add(counterLabel);
+        RootPanel.get("myContent").add(welcomeLabel);
+        // 添加页面导航面板到root面板
+        RootPanel.get("navPanel").add(createNavPanel());
+        /**
+         * 客户端和服务端的通信
+         */
+        // 给按钮1定义回调事件，RPC通信
+        button1.addClickHandler(event -> {
+            // 进行异步调用，避免阻塞UI线程
+            myServiceAsync.accumulate(Integer.parseInt(textBox.getText()), new AsyncCallback<Integer>() {
+                @Override
+                public void onFailure(Throwable caught) {
+                    counterLabel.setText("Error: " + caught.getMessage());
+                }
+
+                @Override
+                public void onSuccess(Integer result) {
+                    counterLabel.setText(result.toString());
+                }
+            });
+        });
+        // 给按钮2定义回调事件，使用RequestBuilder请求SpringBoot程序
+        button2.addClickHandler(clickEvent -> {
+            ApiService.fetchDataOfSayHello(new AsyncCallback<String>() {
+                @Override
+                public void onSuccess(String result) {
+                    counterLabel.setText(result);
+                }
+
+                @Override
+                public void onFailure(Throwable caught) {
+                    counterLabel.setText(caught.getMessage());
+                }
+            });
+        });
+        /**
+         * 定义监听历史记录的状态变化，及其回调函数
+         */
+        History.addValueChangeHandler(event -> {
+            String historyToken = event.getValue();
+            welcomeLabel.setText(setLabelContent(History.getToken()));
+        });
     }
 
+    /**
+     * 创建导航面板
+     *
+     * @return 面板
+     */
     private Panel createNavPanel() {
+        // 创建垂直排列的组件
         VerticalPanel panel = new VerticalPanel();
-        panel.add(new Anchor("Home", "#home"));
-        panel.add(new Anchor("Page 1", "#page1"));
-        panel.add(new Anchor("Page 2", "#page2"));
+        // 将超链接放入到该组件中
+        panel.add(new Anchor("主页", "#home"));
+        panel.add(new Anchor("页面1", "#page1"));
+        panel.add(new Anchor("页面2", "#page2"));
         return panel;
     }
 
-    private void updateContent(String token) {
-        Label content = new Label();
-        switch (token) {
-            case "home":
-                content.setText("Welcome to the Home page!");
-                break;
-            case "page1":
-                content.setText("This is Page 1.");
-                break;
-            case "page2":
-                content.setText("This is Page 2.");
-                break;
-            default:
-                content.setText("Page not found.");
-                break;
+    /**
+     * 更新组件内容
+     *
+     * @param token 浏览器最新的历史记录
+     */
+    private String setLabelContent(String token) {
+
+        if (token == null || token.isEmpty() || "home".equals(token)) {
+            return "欢迎来到主页面";
         }
-        RootPanel.get("myContent").clear();
-        RootPanel.get("myContent").add(content);
+        if ("page1".equals(token)) {
+            return "欢迎来到页面1";
+        }
+        if ("page2".equals(token)) {
+            return "欢迎来到页面2";
+        }
+        return "没有找到页面";
     }
 }
