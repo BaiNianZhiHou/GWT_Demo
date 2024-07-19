@@ -31,60 +31,51 @@ public class MyApp implements EntryPoint {
     @Override
     public void onModuleLoad() {
 
-        /**
-         * 定义组件
-         */
-        final TextBox textBox = new TextBox();
-        final Button button1 = new Button("RPC Button");
-        final Button button2 = new Button("RequestBuilder Button");
-        final Label counterLabel = new Label();
+        // 定义组件
+        final TextBox rpcBox = new TextBox();
+        final Button rpcButton = new Button("RPC Button");
+        final Button rbButton = new Button("RequestBuilder Button");
+        final Label correspondLabel = new Label();
         final Label welcomeLabel = new Label();
         welcomeLabel.setText(setLabelContent(History.getToken()));
-        /**
-         * 将组件定义到根面板中
-         */
-        RootPanel.get("myElement").add(textBox);
-        RootPanel.get("myElement").add(button1);
-        RootPanel.get("myElement").add(button2);
-        RootPanel.get("myElement").add(counterLabel);
+        // 将组件定义到根面板中
+        RootPanel.get("myElement").add(rpcBox);
+        RootPanel.get("myElement").add(rpcButton);
+        RootPanel.get("myElement").add(rbButton);
+        RootPanel.get("myElement").add(correspondLabel);
         RootPanel.get("myContent").add(welcomeLabel);
         // 添加页面导航面板到root面板
         RootPanel.get("navPanel").add(createNavPanel());
-        /**
-         * 客户端和服务端的通信
-         */
-        // 给按钮1定义回调事件，RPC通信
-        button1.addClickHandler(event -> {
+        // 客户端和服务端的通信
+        rpcButton.addClickHandler(event -> {
             // 进行异步调用，避免阻塞UI线程
-            myServiceAsync.accumulate(Integer.parseInt(textBox.getText()), new AsyncCallback<Integer>() {
+            myServiceAsync.accumulate(Integer.parseInt(rpcBox.getText()), new AsyncCallback<Integer>() {
                 @Override
                 public void onFailure(Throwable caught) {
-                    counterLabel.setText("Error: " + caught.getMessage());
+                    correspondLabel.setText("Error: " + caught.getMessage());
                 }
 
                 @Override
                 public void onSuccess(Integer result) {
-                    counterLabel.setText(result.toString());
+                    correspondLabel.setText(result.toString());
                 }
             });
         });
         // 给按钮2定义回调事件，使用RequestBuilder请求SpringBoot程序
-        button2.addClickHandler(clickEvent -> {
+        rbButton.addClickHandler(clickEvent -> {
             ApiService.fetchDataOfSayHello(new AsyncCallback<String>() {
                 @Override
                 public void onSuccess(String result) {
-                    counterLabel.setText(result);
+                    correspondLabel.setText(result);
                 }
 
                 @Override
                 public void onFailure(Throwable caught) {
-                    counterLabel.setText(caught.getMessage());
+                    correspondLabel.setText(caught.getMessage());
                 }
             });
         });
-        /**
-         * 定义监听历史记录的状态变化，及其回调函数
-         */
+        // 定义监听历史记录的状态变化，及其回调函数
         History.addValueChangeHandler(event -> {
             welcomeLabel.setText(setLabelContent(event.getValue()));
         });
