@@ -86,8 +86,7 @@ public class MyApp implements EntryPoint {
          * 定义监听历史记录的状态变化，及其回调函数
          */
         History.addValueChangeHandler(event -> {
-            String historyToken = event.getValue();
-            welcomeLabel.setText(setLabelContent(History.getToken()));
+            welcomeLabel.setText(setLabelContent(event.getValue()));
         });
     }
 
